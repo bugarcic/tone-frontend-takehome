@@ -1,0 +1,8 @@
+The Goal: Build an "AI Tongue-Twister Coach." The app should use an LLM to generate a unique tongue twister, present it to the user, and then "score" their attempt using live transcription.
+The Requirements:
+AI-Generated Twister: Use any public AI API (OpenAI, Anthropic, etc.) to generate a random, difficult tongue twister based on a user-selected theme (e.g., "sea life," "cooking," "space").
+Real-time Transcription: Use the browser's Web Speech API to transcribe the user's attempt live as they speak.
+Visual Scoring: Compare the live transcription to the generated twister, and create some sort of visually interesting scoring UI. Some ideas: highlight correct words in green and stumbles/misses in red in real-time. Track how fast did the user say the tongue twister, or how many repetitions could they say before messing up, etc.
+Performance & State: Focus on the "snappiness" of the UI. How do you handle the delay of the AI generation? How do you manage the lifecycle of the audio stream?
+Polished UX: We want to see your "founding engineer" product sense. Make the interface feel like a professional tool—think clean layouts, tactile feedback, and helpful error handling.
+The tech stack is up to you. We’re looking for clean code that handles "messy" real-time data gracefully. During our review, we’ll talk through your architectural choices and how you’d harden this for a production environment.
