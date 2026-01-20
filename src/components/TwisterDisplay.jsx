@@ -35,8 +35,8 @@ export function TwisterDisplay({ twister, isGenerating, results }) {
   if (!twister) {
     return (
       <div className="bg-[#141414] border border-[#2a2a2a] border-dashed rounded-2xl p-8 md:p-12">
-        <p className="text-[#555] text-center text-lg">
-          Enter a theme and click "Generate" to create your tongue twister
+        <p className="text-[#555] text-center text-sm">
+          Enter a theme and click <span className="inline-flex items-center px-2 py-0.5 mx-1 bg-[#2a2a2a] border border-[#3a3a3a] rounded text-[#888] text-xs font-medium">Generate</span> to create your tongue twister
         </p>
       </div>
     );

@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { ThemeInput } from './components/ThemeInput';
 import { DifficultySelector } from './components/DifficultySelector';
 import { ApiKeyInput } from './components/ApiKeyInput';
@@ -26,6 +26,7 @@ function App() {
   
   // Tongue mode
   const [tongueMode, setTongueMode] = useState(false);
+  const [tongueModeUnlocked, setTongueModeUnlocked] = useState(false);
 
   // Hooks
   const { generateTwister, isGenerating, error: openAIError, clearError: clearOpenAIError } = useOpenAI(apiKey);
@@ -42,6 +43,13 @@ function App() {
     duration,
   } = useSpeechRecognition();
   const { results, scores, overallScore, isComplete, stats } = useScoring(twister, transcript, duration);
+
+  // Unlock tongue mode when user achieves 100% overall score
+  useEffect(() => {
+    if (overallScore === 100 && !tongueModeUnlocked) {
+      setTongueModeUnlocked(true);
+    }
+  }, [overallScore, tongueModeUnlocked]);
 
   // Handlers
   const handleGenerate = useCallback(async () => {
@@ -92,9 +100,13 @@ function App() {
         <header className="mb-8">
           <div className="flex items-start justify-between">
             <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#1a1a1a] border border-[#2a2a2a] rounded-full text-sm text-[#888] mb-6">
-                <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
-                AI-POWERED SPEECH COACH
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#1a1a1a] border border-[#2a2a2a] rounded-full text-sm text-white mb-6">
+                <img 
+                  src="/assets/images/tone-symbol-white.svg" 
+                  alt="Tone Labs" 
+                  className="h-3 w-auto"
+                />
+                <span className="font-medium tracking-wide">Tone Labs</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-semibold text-white leading-tight tracking-tight">
                 Master any tongue twister
@@ -105,7 +117,8 @@ function App() {
             <div className="pt-2">
               <TongueModeToggle 
                 enabled={tongueMode} 
-                onToggle={() => setTongueMode(prev => !prev)} 
+                onToggle={() => setTongueMode(prev => !prev)}
+                isUnlocked={tongueModeUnlocked}
               />
             </div>
           </div>
@@ -218,7 +231,7 @@ function App() {
                 <div className="flex flex-col items-center justify-center py-16 text-center">
                   <div className="w-24 h-24 rounded-full bg-[#1a1a1a] border border-[#2a2a2a] flex items-center justify-center mb-4">
                     <svg className="w-10 h-10 text-[#444]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                     </svg>
                   </div>
                   <p className="text-[#555] text-sm">
