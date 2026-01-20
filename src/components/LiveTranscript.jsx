@@ -47,8 +47,14 @@ export function LiveTranscript({ transcript, interimTranscript, isListening, dur
             )}
           </p>
         ) : (
-          <p className="text-[#555] italic text-lg">
-            {isListening ? 'Start speaking...' : 'Click "Start Speaking" to begin'}
+          <p className="text-[#555] text-sm flex items-center justify-start">
+            {isListening ? (
+              <span className="italic">Start speaking...</span>
+            ) : (
+              <>
+                Click <span className="inline-flex items-center px-2 py-0.5 mx-1 bg-[#2a2a2a] border border-[#3a3a3a] rounded text-[#888] text-xs font-medium">Start Speaking</span> to begin
+              </>
+            )}
           </p>
         )}
       </div>
