@@ -106,7 +106,7 @@ function App() {
                   alt="Tone Labs" 
                   className="h-3 w-auto"
                 />
-                <span className="font-medium tracking-wide">Tone Labs</span>
+                <span className="font-medium tracking-wide">Tongue Labs</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-semibold text-white leading-tight tracking-tight">
                 Master any tongue twister
